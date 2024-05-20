@@ -54,16 +54,19 @@ def coin_button_action():
 	relay.toggle()
 #light_button.when_pressed=switch_logo_light_on
 #light_button.when_released=shutdown
+
+#Turn logo light on
+logo_light.on()
 try:
 	#Coin pulse
 	coin_light.pulse()
 
 	#Set current states
-	if power_button.is_pressed:
-		logo_light.on()
-		print("Logo lights On")
-	else:
-		print("Shutdown") 	
+	#if power_button.is_pressed:
+	#	logo_light.on()
+	#	print("Logo lights On")
+	#else:
+	#	print("Shutdown") 	
 	# Assign event handlers
 	power_button.when_pressed=switch_logo_light_on
 	power_button.when_released=shutdown
