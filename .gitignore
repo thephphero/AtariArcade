@@ -1,0 +1,15 @@
+.bash_history
+usb.sh
+.bash_logout
+.bashrc
+.cache/
+.config/
+.emulationstation
+.gitconfig
+.local/
+.lr-atari800.cfg
+.openMSX/
+.profile
+.ssh/
+RetroPie-Setup/
+backup_retropie
