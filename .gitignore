@@ -13,3 +13,4 @@ usb.sh
 .ssh/
 RetroPie-Setup/
 backup_retropie
+.DS_Store
