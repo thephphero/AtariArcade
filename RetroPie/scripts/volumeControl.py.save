@@ -1,0 +1,16 @@
+import board
+import busio
+import adafruit_max9744
+import serial
+
+#Initialize Serial
+serial = serial.Serial('/dev/ttyUB0', 9600)
+
+#Initialize i2c bus
+i2c = busi.I2C(board.SCL, board.SDA)
+
+#Initialize Amplifier
+amp= adafruit_max9744.MAX9744(i2c
+
+amp.volume_up()
+amp.volume_down()
