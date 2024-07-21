@@ -45,8 +45,8 @@ def main():
       cpu = CPUTemperature()
       ip_address = socket.gethostbyname(socket.gethostname())
       # Publish config??
-      config_payload = {
-          "name": "Retropie Core Temperature",
+      config_temperature_payload = {
+         "name": "Retropie Core Temperature",
           "state_topic": "homeassistant/sensor/retropie/state",
           "state_class": "measurement",
           "unit_of_measurement": "C",
@@ -64,19 +64,38 @@ def main():
           "icon": "mdi:gamepad-square",
           "platform": "mqtt"
       }
-      client.publish(topic="homeassistant/sensor/retropie/config", payload=json.dumps(config_payload), qos=0, retain=False)
+      client.publish(topic="homeassistant/sensor/retropie/config", payload=json.dumps(config_temperature_payload), qos=0, retain=False)
 
-      # Publish State
-      state_payload = {
-	"temperature":cpu.temperature
-	
+      config_uptime_payload = {
+          "name": "Retropie Uptime",
+          "state_topic": "homeassistant/sensor/retropie/state",
+          "state_class": "measurement",
+          "unit_of_measurement": "s",
+          "device_class": "duration",
+          "value_template": "{{ value_json.uptime }}",
+          "unique_id": "retropie",
+          "device": {
+              "identifiers": [
+                  "retropie"
+              ],
+              "name": "Retropie",
+              "model": "Raspberry Pi 4",
+              "manufacturer": "Raspberry Pi Foundation"
+          },
+          "icon": "mdi:gamepad-square",
+          "platform": "mqtt"
       }
-      topic1 = "homeassistant/sensor/retropie/state"
-      client.publish(topic=topic1, payload=json.dumps(state_payload), qos=0, retain=False)
+      client.publish(topic="homeassistant/sensor/retropie/config", payload=json.dumps(config_uptime_payload),qos=0, retain=False)
 
-      # Publish State2
-      topic2 = "homeassistant/sensor/retropie/game/state"
-      client.publish(topic=topic2, payload=str(switch_state), qos=0, retain=False)
+      # Publish Temperature
+      state_temperature_payload = {"temperature":cpu.temperature}
+      state_temperature_topic = "homeassistant/sensor/retropie/state"
+      client.publish(topic=state_temperature_topic, payload=json.dumps(state_temperature_payload), qos=0, retain=False)
+
+      # Publish Uptime
+      state_uptime_payload = {"uptime": uptime }
+      state_uptime_topic = "homeassistant/sensor/retropie/state"
+      client.publish(topic=state_uptime_topic, payload=json.dumps(state_uptime_payload), qos=0, retain=False)
       
 
       time.sleep(6)
